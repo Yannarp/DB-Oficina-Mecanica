@@ -1,17 +1,42 @@
-# Sistema de Controle de Ordens de Serviço para Oficina Mecânica
+# Sistema de Banco de Dados para Oficina Mecânica
 
 ## Descrição do Projeto
-Este projeto é um modelo conceitual para o gerenciamento de ordens de serviço em uma oficina mecânica. 
-Ele abrange o registro de clientes, veículos, equipes de mecânicos, serviços e peças utilizadas em cada ordem de serviço.
+Este projeto visa criar um banco de dados relacional para o gerenciamento eficiente das operações de uma oficina mecânica. O sistema foi modelado para registrar e controlar informações de clientes, veículos, ordens de serviço (OS), serviços realizados, peças utilizadas, mecânicos responsáveis e pagamentos.
 
-### Narrativa
-O sistema foi projetado com base na seguinte narrativa:
-- Os clientes levam veículos à oficina para consertos ou revisões.
-- Cada veículo é designado a uma equipe de mecânicos, que identifica os serviços necessários e preenche uma OS.
-- A partir da OS, calcula-se o valor dos serviços e peças, com base em tabelas de referência.
-- A execução dos serviços é realizada pela equipe atribuída.
+O objetivo é fornecer uma estrutura robusta para armazenar e recuperar dados com eficiência, facilitando a execução de consultas e análises detalhadas.
 
-### Esquema Conceitual
+### Estrutura do Projeto
+Modelagem Conceitual
+
+Diagrama ER (Entidade-Relacionamento) representando todas as entidades, atributos e seus relacionamentos.
+Principais entidades:
+Cliente
+Veículo
+Ordem de Serviço (OS)
+Serviço
+Peça
+Equipe de Mecânicos
+Pagamento
+Modelagem Lógica
+
+Conversão do modelo conceitual para o modelo relacional com tabelas normalizadas.
+Definição de chaves primárias e chaves estrangeiras para manter a integridade dos dados.
+Implementação SQL
+
+Script SQL contendo:
+Criação das tabelas com os respectivos atributos, tipos de dados, PK e FK.
+Inserção de dados (persistência) para testes.
+Consultas SQL com as cláusulas:
+
+<li>SELECT</li>
+<li>WHERE</li>
+<li>ORDER BY</li>
+<li>GROUP BY</li>
+<li>HAVING</li>
+<li>JOIN(junção entre tabelas)</li>
+
+### Estrutura do Banco de Dados
+
 O modelo inclui as seguintes entidades:
 1. Cliente
 2. Veículo
@@ -20,4 +45,21 @@ O modelo inclui as seguintes entidades:
 5. Mecânico
 6. Serviço
 7. Peça
+   
+### Consultas SQL de Exemplo
+Recuperação de todas as Ordens de Serviço abertas:
+
+SELECT * 
+FROM Ordem_de_Serviço 
+WHERE Status = 'Aberta';
+
+Total gasto em peças por Ordem de Serviço:
+
+SELECT ID_OS, SUM(Quantidade * Preço_Unitário) AS Total_Pecas
+FROM Peça
+GROUP BY ID_OS
+HAVING SUM(Quantidade * Preço_Unitário) > 0;
+
+
+   
 
